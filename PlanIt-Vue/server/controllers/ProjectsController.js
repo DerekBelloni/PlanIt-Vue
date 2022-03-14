@@ -12,6 +12,27 @@ export class ProjectsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createProject)
       .get('', this.getProject)
+      .get('/:id', this.getProjectById)
+      .delete('/:id', this.removeProject)
+  }
+  async removeProject(req, res, next) {
+    try {
+      req.body.id = req.params.id
+      req.body.profileId = req.userInfo.id
+      const remove = await projectsService.removeProject(req.body)
+      return res.send(remove)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async getProjectById(req, res, next) {
+    try {
+      req.body.id = req.params.id
+      const project = await projectsService.getProjectById(req.params.id)
+      return res.send(project)
+    } catch (error) {
+      next(error)
+    }
   }
   async getProject(req, res, next) {
     try {
@@ -30,5 +51,7 @@ export class ProjectsController extends BaseController {
       next(error)
     }
   }
+
+
 
 }

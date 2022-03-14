@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import { AccountSchema, ProfileSchema } from '../models/Account'
 import { ProjectSchema } from "../models/Project";
+import { SprintSchema } from "../models/Sprint";
 import { ValueSchema } from '../models/Value'
 
 class DbContext {
@@ -9,6 +10,8 @@ class DbContext {
   Profiles = mongoose.model('Profile', ProfileSchema, 'account');
 
   Projects = mongoose.model('Project', ProjectSchema)
+
+  Sprints = mongoose.model('Sprint', SprintSchema)
 }
 
 export const dbContext = new DbContext()
