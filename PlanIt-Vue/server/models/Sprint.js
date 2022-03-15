@@ -4,21 +4,16 @@ const ObjectId = Schema.Types.ObjectId
 
 export const SprintSchema = new Schema({
   name: { type: String, required: true },
-  projectId: { type: ObjectId, required: true },
-  creatorId: { type: ObjectId, required: true }
+  projectId: { type: ObjectId, ref: 'Project', required: true },
+  creatorId: { type: ObjectId, ref: 'Account', required: true }
 },
   { timestamps: true, toJSON: { virtuals: true } })
 
 SprintSchema.virtual('creator', {
   localField: 'creatorId',
   foreignField: '_id',
-  ref: 'Project',
+  ref: 'Account',
   justOne: true
 })
 
-SprintSchema.virtual('project ', {
-  localField: 'projectId',
-  foreignField: 'projectId',
-  ref: 'Project',
-  justOne: true
-})
+

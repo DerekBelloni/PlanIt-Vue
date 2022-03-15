@@ -1,9 +1,14 @@
 import { dbContext } from "../db/DbContext";
 import { Forbidden } from "../utils/Errors";
+import { sprintsService } from "./SprintsService";
 
 class ProjectsService {
-  async removeProject(body) {
-    const removeProject = await dbContext.Projects.findByIdAndDelete(body.id)
+  async removeProject(projectId, userId) {
+    const project = await dbContext.Projects.findById(projectId)
+    if (project.creatorId.toString() != userId) {
+      throw new Forbidden("not your project to delete")
+    }
+    const removeProject = await dbContext.Projects.findByIdAndDelete(projectId)
     return `deleted ${removeProject}`
   }
   async getProjectById(id) {
