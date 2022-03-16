@@ -1,19 +1,16 @@
 <template>
   <div class="component">
     <form class="d-flex flex-column">
-      <label for="">Project Name</label>
+      <label for="">Sprint Name</label>
       <input
         v-model="editable.name"
         type="text"
-        placeholder="project name..."
+        placeholder="name your sprint"
       />
-      <label for="">Project Description</label>
-      <input
-        v-model="editable.description"
-        type="text"
-        placeholder="project description..."
-      />
-      <button class="btn btn-primary m-2" @click="createProject()">
+      <button
+        class="btn btn-primary m-2"
+        @click="createSprint(activeProject.id)"
+      >
         Submit
       </button>
     </form>
@@ -22,10 +19,34 @@
 
 
 <script>
+import { ref, reactive, computed } from "@vue/reactivity"
+import { logger } from "../utils/Logger";
+import Pop from "../utils/Pop";
+import { sprintsService } from "../services/SprintsService"
+import { watchEffect } from "@vue/runtime-core";
+import { AppState } from "../AppState";
+
+
 export default {
   setup() {
+    let editable = ref({});
+    watchEffect(async () => {
 
-    return {}
+    })
+    return {
+      editable,
+      activeProject: computed(() => AppState.activeProject),
+      async createSprint() {
+        try {
+          await sprintsService.createSprint(editable.value, AppState.activeProject.id)
+
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
+
+    }
   }
 }
 </script>
