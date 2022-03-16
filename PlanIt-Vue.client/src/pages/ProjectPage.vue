@@ -1,5 +1,6 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
+    <OffCanvas />
     <div
       class="
         home
@@ -13,7 +14,7 @@
       <div class="home-card p-5 bg-white rounded elevation-3">
         <div class="row justify-content-between align-items-end">
           <div class="col-md-6 d-flex justify-content-around">
-            <h2 class="d-flex align-items-end m-0">Project Name</h2>
+            <h2 class="d-flex align-items-end m-0">{{ activeProject.name }}</h2>
 
             <i class="weight-icon mdi mdi-weight m-0"> 10</i>
           </div>
@@ -38,11 +39,12 @@
 
 
 <script>
-import { onMounted } from "@vue/runtime-core";
+import { computed, onMounted, watchEffect } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { projectsService } from "../services/ProjectsService";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
+import { AppState } from "../AppState";
 export default {
   setup() {
     const route = useRoute();
@@ -55,6 +57,8 @@ export default {
       }
     })
     return {
+      projects: computed(() => AppState.projects),
+      activeProject: computed(() => AppState.activeProject)
 
     }
   }
