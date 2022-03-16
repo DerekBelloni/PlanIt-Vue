@@ -22,6 +22,11 @@ class ProjectsService {
     AppState.projects.unshift(res.data)
     return res.data
   }
+
+  async deleteProject(projectId) {
+    const res = await api.delete('api/projects/' + projectId)
+    AppState.projects = AppState.projects.filter(p => p.id != projectId)
+  }
 }
 
 export const projectsService = new ProjectsService();

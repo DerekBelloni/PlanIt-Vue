@@ -4,7 +4,10 @@
     <div class="row container-fluid">
       <div class="col-md-6 d-flex justify-content-center align-items-center">
         <h1>{{ activeProject.name }}</h1>
-        <i class="mdi mdi-delete-forever icon-size"></i>
+        <i
+          class="mdi mdi-delete-forever icon-size selectable"
+          @click="deleteProject"
+        ></i>
       </div>
       <div class="col-md-6 d-flex justify-content-center">
         <button
@@ -39,24 +42,39 @@ import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import { AppState } from "../AppState";
 import { sprintsService } from "../services/SprintsService"
+import { router } from "../router";
 export default {
   setup() {
     const route = useRoute();
     watchEffect(async () => {
-      try {
-        await projectsService.setActiveProject(route.params.projectId)
-        await sprintsService.getSprints(AppState.activeProject.id)
+      if (route.params.projectId) {
+        try {
+          await projectsService.setActiveProject(route.params.projectId)
+          await sprintsService.getSprints(AppState.activeProject.id)
 
-      } catch (error) {
-        logger.error(error)
-        Pop.toast(error.message, 'error')
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
       }
     })
 
     return {
       projects: computed(() => AppState.projects),
       activeProject: computed(() => AppState.activeProject),
-      sprints: computed(() => AppState.sprints)
+      sprints: computed(() => AppState.sprints),
+      async deleteProject() {
+        try {
+          await projectsService.deleteProject(route.params.projectId)
+          router.push({
+            name: 'Home',
+          })
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
+
 
     }
   }
