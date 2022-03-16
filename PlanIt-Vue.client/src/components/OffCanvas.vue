@@ -28,7 +28,16 @@
     aria-labelledby="offcanvasExampleLabel"
   >
     <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Projects</h5>
+      <div>
+        <img class="img-fluid profile-image" :src="account.picture" alt="" />
+
+        <h5
+          class="offcanvas-title p-2 border-bottom"
+          id="offcanvasExampleLabel"
+        >
+          {{ account.name }}
+        </h5>
+      </div>
       <button
         type="button"
         class="btn-close text-reset"
@@ -37,16 +46,8 @@
       ></button>
     </div>
     <div class="offcanvas-body">
-      <div>
-        Some text as placeholder. In real life you can have the elements you
-        have chosen. Like, text, images, lists, etc.
-      </div>
       <div class="mt-3">
-        <ul
-          v-for="p in projects"
-          :key="p.id"
-          class="list-group list-group-flush"
-        >
+        <ul v-for="p in projects" :key="p.id" class="list-group-flush">
           <router-link :to="{ name: 'Project', params: { projectId: p.id } }">
             <li class="list-group-item selectable">
               {{ p.name }}
@@ -79,6 +80,7 @@ export default {
     return {
       projects: computed(() => AppState.projects),
       activeProject: computed(() => AppState.activeProject),
+      account: computed(() => AppState.account)
 
     }
   }
@@ -87,4 +89,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.profile-image {
+  border-radius: 50%;
+  height: 85px;
+  border: solid #c38d9e;
+  border-width: 4px;
+}
 </style>

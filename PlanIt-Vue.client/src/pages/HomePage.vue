@@ -17,12 +17,12 @@
               <button
                 class="btn btn-info"
                 data-bs-toggle="modal"
-                data-bs-target="#form-modal"
+                data-bs-target="#project-modal"
               >
                 Create Project
               </button>
             </div>
-            <Modal>
+            <Modal id="project-modal">
               <template #modal-header>
                 <h4>Create Project</h4>
               </template>

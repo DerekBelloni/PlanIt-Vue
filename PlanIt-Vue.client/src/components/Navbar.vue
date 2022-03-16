@@ -56,18 +56,20 @@
               class="dropdown-menu p-0 list-group w-100"
               aria-labelledby="authDropdown"
             >
-              <router-link :to="{ name: 'Account' }">
-                <div
-                  class="
-                    list-group-item
-                    text-dark
-                    list-group-item-action
-                    hoverable
-                  "
-                >
-                  Manage Account
-                </div>
-              </router-link>
+              <div
+                class="
+                  list-group-item
+                  text-dark
+                  list-group-item-action
+                  hoverable
+                  selecatable
+                "
+                data-bs-toggle="modal"
+                data-bs-target="#account-modal"
+              >
+                Edit Profile
+              </div>
+
               <div
                 class="
                   list-group-item list-group-item-action
@@ -85,6 +87,15 @@
       </div>
     </div>
   </nav>
+  <Modal id="account-modal">
+    <template #modal-title>
+      <h4>Edit Profile</h4>
+    </template>
+    <!-- <template #modal-body><CreateProjectForm /></template> -->
+    <!-- <template #modal-footer> -->
+    <!-- <button class="btn btn-primary">Submit</button> -->
+    <!-- </template> -->
+  </Modal>
 </template>
 
 <script>

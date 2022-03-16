@@ -48,14 +48,18 @@ import { AppState } from "../AppState";
 export default {
   setup() {
     const route = useRoute();
-    onMounted(async () => {
+    watchEffect(async () => {
       try {
         await projectsService.setActiveProject(route.params.projectId)
+
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
       }
     })
+    // onMounted(async () => {
+
+    // })
     return {
       projects: computed(() => AppState.projects),
       activeProject: computed(() => AppState.activeProject)
