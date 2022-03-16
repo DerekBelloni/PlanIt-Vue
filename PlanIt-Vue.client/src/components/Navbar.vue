@@ -1,84 +1,88 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
+  <nav
+    class="
+      navbar navbar-expand-lg navbar-dark
+      bg-primary
+      px-3
+      d-flex
+      justify-content-between
+    "
+  >
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center"></div>
+      <div class="d-flex flex-column align-items-center">
+        <h1>Home</h1>
+      </div>
     </router-link>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarText"
-      aria-controls="navbarText"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon" />
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <router-link
-            :to="{ name: 'About' }"
-            class="btn text-dark selectable text-uppercase"
-          >
-            <h1>About</h1>
-          </router-link>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <button
-          class="btn selectable text-uppercase my-2 my-lg-0"
-          @click="login"
-          v-if="!user.isAuthenticated"
-        >
-          Login
-        </button>
+    <h1 class="title-home text-dark">PlanIt</h1>
+    <div>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon" />
+      </button>
 
-        <div class="dropdown my-2 my-lg-0" v-else>
-          <div
-            class="dropdown-toggle selectable"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            id="authDropdown"
+      <div class="collapse navbar-collapse" id="navbarText">
+        <span class="navbar-text">
+          <button
+            class="btn selectable text-uppercase my-2 my-lg-0"
+            @click="login"
+            v-if="!user.isAuthenticated"
           >
-            <img
-              :src="user.picture"
-              alt="user photo"
-              height="40"
-              class="rounded"
-            />
-            <span class="mx-3 text-dark">{{ user.name }}</span>
-          </div>
-          <div
-            class="dropdown-menu p-0 list-group w-100"
-            aria-labelledby="authDropdown"
-          >
-            <router-link :to="{ name: 'Account' }">
+            Login
+          </button>
+
+          <div class="dropdown my-2 my-lg-0" v-else>
+            <div
+              class="dropdown-toggle selectable"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              id="authDropdown"
+            >
+              <img
+                :src="user.picture"
+                alt="user photo"
+                height="40"
+                class="rounded"
+              />
+              <span class="mx-3 text-dark">{{ user.name }}</span>
+            </div>
+            <div
+              class="dropdown-menu p-0 list-group w-100"
+              aria-labelledby="authDropdown"
+            >
+              <router-link :to="{ name: 'Account' }">
+                <div
+                  class="
+                    list-group-item
+                    text-dark
+                    list-group-item-action
+                    hoverable
+                  "
+                >
+                  Manage Account
+                </div>
+              </router-link>
               <div
                 class="
-                  list-group-item
-                  text-dark
-                  list-group-item-action
+                  list-group-item list-group-item-action
                   hoverable
+                  text-danger
                 "
+                @click="logout"
               >
-                Manage Account
+                <i class="mdi mdi-logout"></i>
+                logout
               </div>
-            </router-link>
-            <div
-              class="
-                list-group-item list-group-item-action
-                hoverable
-                text-danger
-              "
-              @click="logout"
-            >
-              <i class="mdi mdi-logout"></i>
-              logout
             </div>
           </div>
-        </div>
-      </span>
+        </span>
+      </div>
     </div>
   </nav>
 </template>
@@ -125,5 +129,8 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+.title-home {
+  font-size: 10vh;
 }
 </style>
