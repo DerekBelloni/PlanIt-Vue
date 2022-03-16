@@ -27,9 +27,6 @@
                 <h4>Create Project</h4>
               </template>
               <template #modal-body><CreateProjectForm /></template>
-              <template #modal-footer>
-                <button class="btn btn-primary">Submit</button>
-              </template>
             </Modal>
           </div>
         </div>

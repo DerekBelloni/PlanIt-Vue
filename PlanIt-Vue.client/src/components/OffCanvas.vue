@@ -31,12 +31,12 @@
       <div>
         <img class="img-fluid profile-image" :src="account.picture" alt="" />
 
-        <h5
+        <h3
           class="offcanvas-title p-2 border-bottom"
           id="offcanvasExampleLabel"
         >
           {{ account.name }}
-        </h5>
+        </h3>
       </div>
       <button
         type="button"
@@ -91,7 +91,8 @@ export default {
 <style lang="scss" scoped>
 .profile-image {
   border-radius: 50%;
-  height: 85px;
+  height: 125px;
+  width: 125px;
   border: solid #c38d9e;
   border-width: 4px;
 }

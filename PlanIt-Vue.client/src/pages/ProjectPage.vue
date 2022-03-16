@@ -1,39 +1,32 @@
 <template>
   <div class="container">
     <OffCanvas />
-    <div
-      class="
-        home
-        flex-grow-1
-        d-flex
-        flex-column
-        align-items-center
-        justify-content-center
-      "
-    >
-      <div class="home-card p-5 bg-white rounded elevation-3">
-        <div class="row justify-content-between align-items-end">
-          <div class="col-md-6 d-flex justify-content-around">
-            <h2 class="d-flex align-items-end m-0">{{ activeProject.name }}</h2>
-
-            <i class="weight-icon mdi mdi-weight m-0"> 10</i>
-          </div>
-          <div class="col-md-6">
-            <div class="row justify-content-around align-items-end">
-              <div class="col-md-6">
-                <button class="task-button btn-warning task-button">
-                  Add Task <i class="mdi mdi-plus"></i>
-                </button>
-              </div>
-              <div class="col-md-6">
-                <h4>Tasks Compete 1/10</h4>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="row container-fluid">
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+        <h1>{{ activeProject.name }}</h1>
+        <i class="mdi mdi-delete-forever icon-size"></i>
+      </div>
+      <div class="col-md-6 d-flex justify-content-center">
+        <button
+          class="task-button btn-warning task-button"
+          data-bs-toggle="modal"
+          data-bs-target="#sprint-modal"
+        >
+          Add Sprint
+          <i class="mdi mdi-plus"></i>
+        </button>
       </div>
     </div>
+    <div v-for="s in sprints" :key="s.id">
+      <Sprint :sprint="s" />
+    </div>
   </div>
+  <Modal id="sprint-modal">
+    <template #modal-title>
+      <h4>Add Sprint</h4>
+    </template>
+    <template #modal-body><CreateSprintForm /></template>
+  </Modal>
 </template>
 
 
@@ -45,24 +38,25 @@ import { projectsService } from "../services/ProjectsService";
 import { logger } from "../utils/Logger";
 import Pop from "../utils/Pop";
 import { AppState } from "../AppState";
+import { sprintsService } from "../services/SprintsService"
 export default {
   setup() {
     const route = useRoute();
     watchEffect(async () => {
       try {
         await projectsService.setActiveProject(route.params.projectId)
+        await sprintsService.getSprints(AppState.activeProject.id)
 
       } catch (error) {
         logger.error(error)
         Pop.toast(error.message, 'error')
       }
     })
-    // onMounted(async () => {
 
-    // })
     return {
       projects: computed(() => AppState.projects),
-      activeProject: computed(() => AppState.activeProject)
+      activeProject: computed(() => AppState.activeProject),
+      sprints: computed(() => AppState.sprints)
 
     }
   }
@@ -96,7 +90,7 @@ export default {
   width: 120px;
 }
 
-.weight-icon {
-  font-size: 32px;
+.icon-size {
+  font-size: 48px;
 }
 </style>

@@ -91,10 +91,7 @@
     <template #modal-title>
       <h4>Edit Profile</h4>
     </template>
-    <!-- <template #modal-body><CreateProjectForm /></template> -->
-    <!-- <template #modal-footer> -->
-    <!-- <button class="btn btn-primary">Submit</button> -->
-    <!-- </template> -->
+    <template #modal-body><EditAccountForm /></template>
   </Modal>
 </template>
 
@@ -102,6 +99,8 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed } from 'vue'
+import { accountService } from "../services/AccountService"
+import { Modal } from "bootstrap";
 export default {
   setup() {
     return {
@@ -111,7 +110,9 @@ export default {
       },
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
-      }
+      },
+
+
     }
   }
 }
