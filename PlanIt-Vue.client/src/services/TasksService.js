@@ -10,7 +10,7 @@ class TasksService {
         AppState.tasks = res.data
     }
     async createTask(body, projectId) {
-        const res = await api.post('api/projects/' + projectId + '/tasks/' + body)
+        const res = await api.post('api/projects/' + projectId + '/tasks/', body)
         AppState.tasks.unshift(res.data)
     }
     async deleteTask(taskId, projectId) {

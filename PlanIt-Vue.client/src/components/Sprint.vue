@@ -25,7 +25,7 @@
                 <h4>Add Task</h4>
               </template>
               <template #modal-body>
-                <CreateTaskForm />
+                <CreateTaskForm :sprint="sprint" />
               </template>
             </Modal>
           </div>
@@ -101,7 +101,7 @@ export default {
     }
   },
 
-  setup() {
+  setup(props) {
     const route = useRoute()
     watchEffect(async () => {
       try {
@@ -113,7 +113,7 @@ export default {
     })
     return {
       projects: computed(() => AppState.projects),
-      tasks: computed(() => AppState.tasks),
+      tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
       activeProject: computed(() => AppState.activeProject),
       async deleteSprint(sprintId) {
         try {
@@ -135,7 +135,6 @@ export default {
 }
 .sprint-card {
   width: 750px;
-  height: 250px;
 }
 .task-button {
   height: 40px;

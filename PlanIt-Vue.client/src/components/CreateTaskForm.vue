@@ -5,7 +5,7 @@
         <div class="col-md-6">
           <label for="">Label the task at hand</label>
           <input
-            v-model="editable.description"
+            v-model="editable.name"
             type="text"
             placeholder="What shall we do..."
           />
@@ -18,9 +18,7 @@
           />
         </div>
       </div>
-      <button class="btn btn-primary m-2" @click="createTask(activeProject.id)">
-        Submit
-      </button>
+      <button class="btn btn-primary m-2" @click="createTask()">Submit</button>
     </form>
   </div>
 </template>
@@ -34,9 +32,17 @@ import { sprintsService } from "../services/SprintsService"
 import { watchEffect } from "@vue/runtime-core";
 import { AppState } from "../AppState";
 import { tasksService } from '../services/TasksService';
+import { useRoute } from "vue-router";
 export default {
-  setup() {
-    let editable = ref({});
+  props: {
+    sprint: {
+      type: Object,
+      required: true
+    }
+  },
+  setup(props) {
+    const route = useRoute()
+    let editable = ref({ sprintId: props.sprint.id });
     watchEffect(async () => {
 
     })
@@ -45,7 +51,7 @@ export default {
       activeProject: computed(() => AppState.activeProject),
       async createTask(activeProjectId) {
         try {
-          await tasksService.createTask(editable.value, activeProjectId)
+          await tasksService.createTask(editable.value, route.params.projectId)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

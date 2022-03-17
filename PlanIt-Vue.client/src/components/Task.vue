@@ -6,14 +6,14 @@
           @click="deleteTask"
           class="mdi mdi-delete px-1 d-flex align-items-center"
         ></i>
-        <h4>This is a task</h4>
+        <h4>{{ task.name }}</h4>
       </div>
 
       <div class="col-md-6 d-flex align-items-end justify-content-end">
         <div class="row">
           <div class="col-md-4 d-flex align-items-end">
-            <h6>10</h6>
-            <i class="mdi mdi-weight"></i>
+            <h6>{{ task.weight }}</h6>
+            <i class="mdi mdi-weight"> </i>
           </div>
           <div class="col-md-8 d-flex justify-content-end">
             <button
@@ -34,16 +34,25 @@
 <script>
 import { useRoute } from "vue-router"
 import { tasksService } from '../services/TasksService'
-export default {
+import { logger } from "../utils/Logger"
+import Pop from "../utils/Pop"
 
-  setup() {
+export default {
+  props: {
+    task: {
+      type: Object,
+      required: true
+    }
+  },
+
+  setup(props) {
     const route = useRoute()
     return {
 
 
-      async deleteTask(taskId) {
+      async deleteTask() {
         try {
-          await tasksService.deleteTask(taskId, route.params.projectId)
+          await tasksService.deleteTask(props.task.id, route.params.projectId)
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')
