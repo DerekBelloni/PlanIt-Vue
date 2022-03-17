@@ -3,6 +3,10 @@
     <form class="d-flex flex-column">
       <label for="">Label the task at hand</label>
       <input v-model="editable" type="text" placeholder="What shall we do..." />
+
+      <label for="">Weight</label>
+      <input v-model="editable" type="number" placeholder="How hard" />
+
       <button class="btn btn-primary m-2" @click="createTask(activeProject.id)">
         Submit
       </button>

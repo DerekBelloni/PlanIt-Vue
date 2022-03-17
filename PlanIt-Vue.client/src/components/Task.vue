@@ -2,7 +2,10 @@
   <div class="component">
     <div class="row p-2 shadow mt-2 bg-secondary rounded">
       <div class="col-md-6 d-flex justify-content-start align-items-end">
-        <i class="mdi mdi-delete px-1 d-flex align-items-center"></i>
+        <i
+          @click="deleteTask"
+          class="mdi mdi-delete px-1 d-flex align-items-center"
+        ></i>
         <h4>This is a task</h4>
       </div>
 
@@ -29,10 +32,23 @@
 
 
 <script>
+import { tasksService } from '../services/TasksService'
 export default {
 
   setup() {
-    return {}
+    const route = useRoute()
+    return {
+
+
+      async deleteTask(taskId) {
+        try {
+          await tasksService.deleteTask(taskId, route.params.projectId)
+        } catch (error) {
+          logger.error(error)
+          Pop.toast(error.message, 'error')
+        }
+      }
+    }
   }
 }
 </script>
