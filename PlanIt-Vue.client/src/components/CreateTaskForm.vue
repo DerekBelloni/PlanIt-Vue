@@ -43,7 +43,7 @@ export default {
     return {
       editable,
       activeProject: computed(() => AppState.activeProject),
-      async createTask(activeProjectd) {
+      async createTask(activeProjectId) {
         try {
           await tasksService.createTask(editable.value, activeProjectId)
         } catch (error) {

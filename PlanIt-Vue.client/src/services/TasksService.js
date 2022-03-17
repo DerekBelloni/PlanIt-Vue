@@ -5,13 +5,13 @@ import { api } from "./AxiosService"
 
 class TasksService {
     async getTasks(projectId) {
-        const res = await api.get('api/projects/', projectId, '/tasks')
+        const res = await api.get('api/projects/' + projectId + '/tasks')
         logger.log('tasks for project', res.data)
         AppState.tasks = res.data
     }
     async createTask(body, projectId) {
-        const res = await api.post('api/projects/', projectId, '/tasks/', body)
-        AppState.tasks.unshift(res.data0)
+        const res = await api.post('api/projects/' + projectId + '/tasks/' + body)
+        AppState.tasks.unshift(res.data)
     }
     async deleteTask(taskId, projectId) {
         const res = await api.delete('api/projects/' + projectId + '/tasks/' + taskId)
