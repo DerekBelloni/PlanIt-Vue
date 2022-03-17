@@ -1,15 +1,17 @@
 <template>
   <div class="container">
-    <OffCanvas />
-    <div class="row container-fluid">
+    <div class="row container-fluid justify-content-evenly">
+      <div class="col-md-3 d-flex justify-content-center align-items-center">
+        <OffCanvas />
+      </div>
       <div class="col-md-6 d-flex justify-content-center align-items-center">
-        <h1>{{ activeProject.name }}</h1>
+        <h1 class="title-text">{{ activeProject.name }}</h1>
         <i
           class="mdi mdi-delete-forever icon-size selectable"
           @click="deleteProject"
         ></i>
       </div>
-      <div class="col-md-6 d-flex justify-content-center">
+      <div class="col-md-3 d-flex justify-content-center align-items-center">
         <button
           class="task-button btn-warning task-button"
           data-bs-toggle="modal"
@@ -110,5 +112,8 @@ export default {
 
 .icon-size {
   font-size: 48px;
+}
+.title-text {
+  font-size: 50px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="row w-100 justify-content-start">
-    <div class="col-12">
+    <div class="d-flex justify-content-center">
       <button
         class="
           create-btn
@@ -32,7 +32,7 @@
         <img class="img-fluid profile-image" :src="account.picture" alt="" />
 
         <h3
-          class="offcanvas-title p-2 border-bottom"
+          class="offcanvas-title p-2 border-bottom border-3 border-dark"
           id="offcanvasExampleLabel"
         >
           {{ account.name }}
