@@ -1,12 +1,8 @@
 <template>
   <div class="component">
     <form class="d-flex flex-column">
-      <label for="">woo</label>
-      <input
-        v-model="editable.name"
-        type="text"
-        placeholder="name your sprint"
-      />
+      <label for="">Label the task at hand</label>
+      <input v-model="editable" type="text" placeholder="What shall we do..." />
       <button class="btn btn-primary m-2" @click="createTask(activeProject.id)">
         Submit
       </button>

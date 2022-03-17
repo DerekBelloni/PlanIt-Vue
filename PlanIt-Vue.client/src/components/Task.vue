@@ -3,7 +3,7 @@
     <div class="row p-2 shadow mt-2 bg-secondary rounded">
       <div class="col-md-6 d-flex justify-content-start align-items-end">
         <i class="mdi mdi-delete px-1 d-flex align-items-center"></i>
-        <h4>{{}}</h4>
+        <h4>This is a task</h4>
       </div>
 
       <div class="col-md-6 d-flex align-items-end justify-content-end">
@@ -30,12 +30,7 @@
 
 <script>
 export default {
-  props: {
-    task: {
-      type: Object,
-      required: true,
-    }
-  },
+
   setup() {
     return {}
   }

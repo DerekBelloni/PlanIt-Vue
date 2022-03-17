@@ -14,7 +14,7 @@
           >
             <!-- task button -->
             <button
-              class="task-button btn-warning task-button"
+              class="task-button btn-warning task-button rounded"
               data-bs-toggle="modal"
               data-bs-target="#task-modal"
             >
@@ -24,7 +24,9 @@
               <template #modal-title>
                 <h4>Add Task</h4>
               </template>
-              <template #modal-body><CreateTaskForm /></template>
+              <template #modal-body>
+                <CreateTaskForm />
+              </template>
             </Modal>
           </div>
           <div
