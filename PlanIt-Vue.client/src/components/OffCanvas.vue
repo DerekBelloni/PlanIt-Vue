@@ -46,10 +46,10 @@
       ></button>
     </div>
     <div class="offcanvas-body">
-      <div class="mt-3">
+      <div class="mt-32">
         <ul v-for="p in projects" :key="p.id" class="list-group-flush">
           <router-link :to="{ name: 'Project', params: { projectId: p.id } }">
-            <li class="list-group-item selectable">
+            <li class="list-group-item selectable m-1 float text-center">
               {{ p.name }}
             </li>
           </router-link>
@@ -95,5 +95,9 @@ export default {
   width: 125px;
   border: solid #c38d9e;
   border-width: 4px;
+}
+.float:hover {
+  width: 350px;
+  height: 50px;
 }
 </style>

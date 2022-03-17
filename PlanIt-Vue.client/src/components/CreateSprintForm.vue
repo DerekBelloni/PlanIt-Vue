@@ -39,7 +39,6 @@ export default {
       async createSprint() {
         try {
           await sprintsService.createSprint(editable.value, AppState.activeProject.id)
-
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

@@ -9,6 +9,10 @@ class TasksService {
         logger.log('tasks for project', res.data)
         AppState.tasks = res.data
     }
+    async createTask(body, projectId) {
+        const res = await api.post('api/projects/', projectId, '/tasks/', body)
+        AppState.tasks.unshift(res.data0)
+    }
     async deleteTask(taskId, projectId) {
         const res = await api.delete('api/projects/' + projectId + '/tasks/' + taskId)
         AppState.tasks = AppState.tasks.filter(t => t.id != taskId)

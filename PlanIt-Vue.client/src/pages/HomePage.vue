@@ -30,7 +30,7 @@
             </Modal>
           </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center m-3">
           <div class="col-md-8">
             <ul
               v-for="p in projects"
