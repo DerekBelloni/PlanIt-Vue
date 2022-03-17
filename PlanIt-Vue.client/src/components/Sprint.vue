@@ -12,9 +12,20 @@
               task-button
             "
           >
-            <button class="task-button btn-warning task-button">
+            <!-- task button -->
+            <button
+              class="task-button btn-warning task-button"
+              data-bs-toggle="modal"
+              data-bs-target="#task-modal"
+            >
               Add Task <i class="mdi mdi-plus"></i>
             </button>
+            <Modal id="task-modal">
+              <template #modal-title>
+                <h4>Add Task</h4>
+              </template>
+              <template #modal-body><CreateTaskForm /></template>
+            </Modal>
           </div>
           <div
             class="
@@ -61,14 +72,9 @@
             </div>
           </div>
         </div>
-        <div class="row p-2">
-          <div class="col-md-4 d-flex justify-content-start">
-            <i class="mdi mdi-delete px-1 d-flex align-items-center"></i>
-            <h4>task name</h4>
-          </div>
-          <div class="col-md-8">
-            <h5>Task weight</h5>
-          </div>
+        <!-- task item -->
+        <div v-for="t in tasks" :key="t.id">
+          <Task :task="t" />
         </div>
       </div>
     </div>
@@ -79,10 +85,12 @@
 <script>
 import { computed } from "@vue/reactivity"
 import { sprintsService } from "../services/SprintsService"
+import { tasksService } from "../services/TasksService"
 import { logger } from "../utils/Logger"
 import Pop from "../utils/Pop"
 import { AppState } from "../AppState"
 import { useRoute } from "vue-router"
+import { watchEffect } from '@vue/runtime-core'
 export default {
   props: {
     sprint: {
@@ -93,8 +101,17 @@ export default {
 
   setup() {
     const route = useRoute()
+    watchEffect(async () => {
+      try {
+        await tasksService.getTasks(route.params.projectId)
+      } catch (error) {
+        logger.error(error)
+        Pop.toast(error.message, 'error')
+      }
+    })
     return {
-
+      projects: computed(() => AppState.projects),
+      tasks: computed(() => AppState.tasks),
       activeProject: computed(() => AppState.activeProject),
       async deleteSprint(sprintId) {
         try {
@@ -123,5 +140,8 @@ export default {
 }
 .weight-size {
   font-size: 25px;
+}
+.note-button {
+  height: 30px;
 }
 </style>
