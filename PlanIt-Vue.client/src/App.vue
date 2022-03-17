@@ -6,7 +6,9 @@
     <router-view />
   </main>
   <footer>
-    <div class="bg-primary text-dark text-center p-4"></div>
+    <div class="bg-primary text-dark text-center p-4">
+      <h1 class="text-secondary">Welcome</h1>
+    </div>
   </footer>
 </template>
 
