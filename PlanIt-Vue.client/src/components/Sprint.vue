@@ -16,11 +16,11 @@
             <button
               class="task-button btn-warning task-button rounded"
               data-bs-toggle="modal"
-              data-bs-target="#task-modal"
+              :data-bs-target="'#task-modal' + sprint.id"
             >
               Add Task <i class="mdi mdi-plus"></i>
             </button>
-            <Modal id="task-modal">
+            <Modal :id="'task-modal' + sprint.id">
               <template #modal-title>
                 <h4>Add Task</h4>
               </template>
@@ -53,7 +53,7 @@
                 class="col-md-8 d-flex justify-content-around align-items-end"
               >
                 <h4 class="d-flex justify-contents-center align-items-center">
-                  10
+                  {{ totalTaskWeight }}
                 </h4>
                 <i
                   class="
@@ -67,6 +67,7 @@
               </div>
               <div class="col-md-4">
                 <i
+                  v-if="account.id == sprint.creatorId"
                   class="mdi mdi-delete-forever icon-size selectable"
                   @click="deleteSprint(sprint.id)"
                 ></i>
@@ -103,21 +104,26 @@ export default {
 
   setup(props) {
     const route = useRoute()
-    watchEffect(async () => {
-      try {
-        await tasksService.getTasks(route.params.projectId)
-      } catch (error) {
-        logger.error(error)
-        Pop.toast(error.message, 'error')
-      }
-    })
+
     return {
+      totalTaskWeight: computed(() => {
+        let sum = 0
+        for (let i = 0; i < AppState.tasks.length; i++) {
+          const elem = AppState.tasks[i];
+          sum += elem.weight
+          return sum
+        }
+      }),
+      tasks: computed(() => AppState.tasks),
+      account: computed(() => AppState.account),
       projects: computed(() => AppState.projects),
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
       activeProject: computed(() => AppState.activeProject),
       async deleteSprint(sprintId) {
         try {
-          await sprintsService.deleteSprint(sprintId, route.params.projectId)
+          if (await Pop.confirm("are you sure you want to delete this sprint?")) {
+            await sprintsService.deleteSprint(sprintId, route.params.projectId)
+          }
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

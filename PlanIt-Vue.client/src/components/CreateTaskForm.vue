@@ -43,9 +43,7 @@ export default {
   setup(props) {
     const route = useRoute()
     let editable = ref({ sprintId: props.sprint.id });
-    watchEffect(async () => {
 
-    })
     return {
       editable,
       activeProject: computed(() => AppState.activeProject),

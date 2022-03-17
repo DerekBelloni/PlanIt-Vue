@@ -17,6 +17,19 @@ class TasksService {
         const res = await api.delete('api/projects/' + projectId + '/tasks/' + taskId)
         AppState.tasks = AppState.tasks.filter(t => t.id != taskId)
     }
+    async changeSprint(newSprintId, ProjectId, taskId) {
+        let changedTask = AppState.tasks.find(t => t.id == taskId)
+        changedTask.sprintId = newSprintId
+
+        const res = await api.put('api/projects/' + ProjectId + "/tasks/" + taskId, { sprintId: newSprintId })
+    }
+
+    async markComplete(taskId, projectId, taskisComplete) {
+        let tasktoComplete = AppState.tasks.find(t => t.id == taskId)
+        tasktoComplete.isComplete = !taskisComplete.isComplete
+        const res = await api.put('api/projects/' + projectId + '/tasks/' + taskId, tasktoComplete)
+        logger.log('task flipped', res.data)
+    }
 }
 
 

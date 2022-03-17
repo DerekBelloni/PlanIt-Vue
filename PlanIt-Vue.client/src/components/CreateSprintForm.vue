@@ -30,9 +30,7 @@ import { AppState } from "../AppState";
 export default {
   setup() {
     let editable = ref({});
-    watchEffect(async () => {
 
-    })
     return {
       editable,
       activeProject: computed(() => AppState.activeProject),

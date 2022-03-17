@@ -7,6 +7,7 @@
       <div class="col-md-6 d-flex justify-content-center align-items-center">
         <h1 class="title-text">{{ activeProject.name }}</h1>
         <i
+          v-if="account.id == activeProject.creatorId"
           class="mdi mdi-delete-forever icon-size selectable"
           @click="deleteProject"
         ></i>
@@ -45,6 +46,8 @@ import Pop from "../utils/Pop";
 import { AppState } from "../AppState";
 import { sprintsService } from "../services/SprintsService"
 import { router } from "../router";
+import { tasksService } from "../services/TasksService"
+import { notesService } from "../services/NotesService"
 export default {
   setup() {
     const route = useRoute();
@@ -53,6 +56,8 @@ export default {
         try {
           await projectsService.setActiveProject(route.params.projectId)
           await sprintsService.getSprints(AppState.activeProject.id)
+          await tasksService.getTasks(route.params.projectId)
+          await notesService.getNotes(route.params.projectId)
 
         } catch (error) {
           logger.error(error)
@@ -62,12 +67,16 @@ export default {
     })
 
     return {
+      account: computed(() => AppState.account),
       projects: computed(() => AppState.projects),
       activeProject: computed(() => AppState.activeProject),
       sprints: computed(() => AppState.sprints),
       async deleteProject() {
         try {
-          await projectsService.deleteProject(route.params.projectId)
+          if (await Pop.confirm("Are you sure you want to delete tihs project?")) {
+            await projectsService.deleteProject(route.params.projectId)
+          }
+
           router.push({
             name: 'Home',
           })
