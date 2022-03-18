@@ -23,7 +23,9 @@
       </div>
     </form>
     <div v-for="n in notes" :key="n.id">
-      <h2>{{ n.body }}</h2>
+      <h5>{{ n.body }}</h5>
+      <img class="border img-fluid note-img" :src="n.creator.picture" alt="" />
+
       <i
         v-if="account.id == n.creatorId"
         class="mdi mdi-delete-forever selectable"
@@ -83,4 +85,9 @@ export default {
 
 
 <style lang="scss" scoped>
+.note-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
 </style>

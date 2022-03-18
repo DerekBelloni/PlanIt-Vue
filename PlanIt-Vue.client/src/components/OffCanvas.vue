@@ -50,15 +50,7 @@
         <ul v-for="p in projects" :key="p.id" class="">
           <router-link :to="{ name: 'Project', params: { projectId: p.id } }">
             <li
-              class="
-                round
-                list-group-item
-                selectable
-                m-1
-                float
-                text-center
-                bg-dark
-              "
+              class="list-group-item selectable m-1 float text-center bg-dark"
             >
               <h3>{{ p.name }}</h3>
             </li>
