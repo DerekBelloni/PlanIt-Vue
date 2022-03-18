@@ -9,7 +9,7 @@
     "
   >
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center text-dark">
         <h1>Home</h1>
       </div>
     </router-link>
