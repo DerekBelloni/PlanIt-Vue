@@ -2,11 +2,24 @@
   <div class="component">
     <form class="d-flex flex-column">
       <div class="row">
-        <div class="col-md-6">
-          <label for="">Transfer task to other sprint</label>
-          <ul class="list-group-flush" v-for="s in sprints" :key="s.id">
+        <label class="d-flex align-items-center justify-content-center">
+          <h3 class="border-bottom border-3 border-info">
+            Transfer task to other sprint
+          </h3>
+        </label>
+        <div class="row container-fluid px-5">
+          <ul class="list-group-flush p-0" v-for="s in sprints" :key="s.id">
             <li
-              class="list-group-item selectable m-1 float text-center"
+              class="
+                rounded
+                container-fluid
+                bg-secondary
+                list-group-item
+                selectable
+                m-1
+                float
+                text-center
+              "
               @click="changeSprint(s.id)"
             >
               {{ s.name }}

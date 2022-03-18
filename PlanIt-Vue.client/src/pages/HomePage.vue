@@ -12,19 +12,30 @@
       <div class="card card-style" style="width: 50em">
         <div class="card-body">
           <div class="row">
-            <div class="col-md-6 p-2"><h2>Projects</h2></div>
-            <div class="col-md-6 p-2 d-flex justify-content-end">
+            <div class="col-md-4"></div>
+            <div
+              class="
+                col-md-4
+                d-flex
+                align-items-center
+                justify-content-center
+                p-2
+              "
+            >
+              <h2>Your Projects</h2>
+            </div>
+            <div class="col-md-4 p-2 d-flex justify-content-end">
               <button
-                class="btn btn-info"
+                class="btn btn-info shadow"
                 data-bs-toggle="modal"
                 data-bs-target="#project-modal"
               >
-                Create Project
+                <b>Create Project</b>
               </button>
             </div>
             <Modal id="project-modal">
               <template #modal-header>
-                <h4>Create Project</h4>
+                <h4 class="text-dark">Create Project</h4>
               </template>
               <template #modal-body><CreateProjectForm /></template>
             </Modal>
@@ -40,8 +51,18 @@
               <router-link
                 :to="{ name: 'Project', params: { projectId: p.id } }"
               >
-                <li class="list-group-item selectable">
-                  {{ p.name }}
+                <li
+                  class="
+                    shadow
+                    list-group-item
+                    selectable
+                    rounded
+                    m-1
+                    bg-danger
+                    text-center
+                  "
+                >
+                  <b> {{ p.name }}</b>
                 </li>
               </router-link>
             </ul>

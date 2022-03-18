@@ -23,14 +23,36 @@
       </div>
     </form>
     <div v-for="n in notes" :key="n.id">
-      <h5>{{ n.body }}</h5>
-      <img class="border img-fluid note-img" :src="n.creator.picture" alt="" />
-
-      <i
-        v-if="account.id == n.creatorId"
-        class="mdi mdi-delete-forever selectable"
-        @click="deleteNote(n.id)"
-      />
+      <div class="row p-1 border border-2 m-1">
+        <div class="row p-2 justify-content-between">
+          <div class="col-md-11 d-flex align-items-center p-1">
+            <img
+              class="border img-fluid note-img"
+              :src="n.creator.picture"
+              alt=""
+            />
+            <p class="m-2">{{ n.creator.name }}</p>
+          </div>
+          <div class="col-md-1 d-flex align-items-start justify-content-end">
+            <i
+              v-if="account.id == n.creatorId"
+              class="
+                mdi mdi-delete-forever
+                selectable
+                d-flex
+                justify-content-end
+              "
+              @click="deleteNote(n.id)"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-end">
+            <h5>{{ n.body }}</h5>
+          </div>
+          <div class="col-md-3"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -72,7 +94,10 @@ export default {
 
       async deleteNote(noteId) {
         try {
-          await notesService.deleteNote(noteId, route.params.projectId)
+          if (await Pop.confirm("Are you sure you want to delete?")) {
+            await notesService.deleteNote(noteId, route.params.projectId)
+          }
+
         } catch (error) {
           logger.error(error)
           Pop.toast(error.message, 'error')

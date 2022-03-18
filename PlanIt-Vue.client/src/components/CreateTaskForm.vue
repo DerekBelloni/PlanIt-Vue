@@ -18,7 +18,9 @@
           />
         </div>
       </div>
-      <button class="btn btn-primary m-2" @click="createTask()">Submit</button>
+      <button class="btn btn-danger shadow m-2" @click="createTask()">
+        Submit
+      </button>
     </form>
   </div>
 </template>

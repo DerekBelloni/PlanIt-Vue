@@ -1,9 +1,9 @@
 <template>
-  <div class="component">
+  <div class="component mt-3">
     <div class="row p-2 shadow mt-2 bg-secondary selectable rounded">
       <div class="col-md-3 d-flex align-items-center justify-content-between">
         <div class="d-flex justify-content-around">
-          <div class="col-md-6">
+          <div class="col-md-6 p-2">
             <!-- note canvas -->
             <i
               class="icon mdi mdi-comment-text-multiple-outline"
@@ -11,7 +11,7 @@
               :data-bs-target="'#oc-' + task.id"
             />
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 p-2">
             <!-- edit task gear -->
             <i
               class="icon mdi mdi-cog-outline selectable"
@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6 d-flex align-items-center justify-content-around">
+      <div class="col-md-6 d-flex align-items-center">
         <div class="row">
           <div class="col-md-12 d-flex">
             <div class="d-flex align-items-end">
@@ -76,7 +76,7 @@
   <OffCanvasNotes :id="'oc-' + task.id">
     <template #oc-title>
       <h2 class="border-bottom border-3 border-dark">
-        {{ task.name }} Details
+        <b> {{ task.name }} Details</b>
       </h2>
     </template>
     <template #oc-body><Notes :task="task" /></template>

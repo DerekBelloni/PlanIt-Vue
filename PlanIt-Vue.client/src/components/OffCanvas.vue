@@ -32,10 +32,10 @@
         <img class="img-fluid profile-image" :src="account.picture" alt="" />
 
         <h2
-          class="bold offcanvas-title p-2 border-bottom border-3 border-dark"
+          class="bold offcanvas-title p-0 border-bottom border-3 border-dark"
           id="offcanvasExampleLabel"
         >
-          {{ account.name }}
+          <b> {{ account.name }}</b>
         </h2>
       </div>
       <button
@@ -50,7 +50,15 @@
         <ul v-for="p in projects" :key="p.id" class="">
           <router-link :to="{ name: 'Project', params: { projectId: p.id } }">
             <li
-              class="list-group-item selectable m-1 float text-center bg-dark"
+              class="
+                round
+                list-group-item
+                selectable
+                m-1
+                float
+                text-center
+                bg-dark
+              "
             >
               <h3>{{ p.name }}</h3>
             </li>

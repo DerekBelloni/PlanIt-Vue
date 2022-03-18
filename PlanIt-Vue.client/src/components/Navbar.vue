@@ -13,7 +13,9 @@
         <h1>Home</h1>
       </div>
     </router-link>
-    <h1 class="title-home text-dark">PlanIt</h1>
+    <h1 class="title-home text-dark">
+      <b> Plan-It</b>
+    </h1>
     <div>
       <button
         class="navbar-toggler"
@@ -144,5 +146,6 @@ a:hover {
 }
 .title-home {
   font-size: 10vh;
+  text-shadow: 0px 0px 10px white;
 }
 </style>

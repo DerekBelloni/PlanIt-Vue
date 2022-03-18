@@ -14,7 +14,7 @@
           >
             <!-- task button -->
             <button
-              class="task-button btn-warning task-button rounded"
+              class="task-button btn-warning task-button rounded shadow"
               data-bs-toggle="modal"
               :data-bs-target="'#task-modal' + sprint.id"
             >
@@ -22,7 +22,7 @@
             </button>
             <Modal :id="'task-modal' + sprint.id">
               <template #modal-title>
-                <h4>Add Task</h4>
+                <h4><b> Add Task</b></h4>
               </template>
               <template #modal-body>
                 <CreateTaskForm :sprint="sprint" />
@@ -106,14 +106,6 @@ export default {
     const route = useRoute()
 
     return {
-      totalTaskWeight: computed(() => {
-        let sum = 0
-        for (let i = 0; i < AppState.tasks.length; i++) {
-          const elem = AppState.tasks[i];
-          sum += elem.weight
-          return sum
-        }
-      }),
       tasks: computed(() => AppState.tasks),
       account: computed(() => AppState.account),
       projects: computed(() => AppState.projects),
