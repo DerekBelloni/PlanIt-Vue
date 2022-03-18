@@ -8,6 +8,9 @@
             v-model="editable.name"
             type="text"
             placeholder="What shall we do..."
+            name="name"
+            aria-label="name"
+            aria-title="name"
           />
 
           <label for="">Weight</label>
@@ -15,6 +18,9 @@
             v-model="editable.weight"
             type="number"
             placeholder="How hard"
+            name="weight"
+            aria-label="weight"
+            aria-title="weight"
           />
         </div>
       </div>
