@@ -4,7 +4,9 @@
       <div class="col-md-3 d-flex justify-content-center align-items-center">
         <OffCanvas />
       </div>
-      <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <div
+        class="col-md-6 d-flex justify-content-around align-items-center p-3"
+      >
         <h1 class="title-text">{{ activeProject.name }}</h1>
         <i
           v-if="account.id == activeProject.creatorId"
@@ -14,7 +16,7 @@
       </div>
       <div class="col-md-3 d-flex justify-content-center align-items-center">
         <button
-          class="task-button btn-warning task-button"
+          class="task-button shadow btn-warning task-button"
           data-bs-toggle="modal"
           data-bs-target="#sprint-modal"
         >

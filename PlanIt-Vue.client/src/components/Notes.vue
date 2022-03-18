@@ -7,17 +7,17 @@
             v-model="editable.body"
             type="text"
             class="form-control"
-            placeholder="what would you like to add"
+            placeholder="thoughts?"
             aria-label="tasknotes"
             aria-describedby="button-addon2"
           />
           <button
-            class="btn btn-outline-secondary"
+            class="btn btn-secondary"
             type="button"
             id="button-addon2"
             @click="createNote()"
           >
-            Add note
+            <b> Add note</b>
           </button>
         </div>
       </div>

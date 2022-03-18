@@ -27,16 +27,16 @@
     id="offcanvasExample"
     aria-labelledby="offcanvasExampleLabel"
   >
-    <div class="offcanvas-header">
+    <div class="offcanvas-header bg-info">
       <div>
         <img class="img-fluid profile-image" :src="account.picture" alt="" />
 
-        <h3
-          class="offcanvas-title p-2 border-bottom border-3 border-dark"
+        <h2
+          class="bold offcanvas-title p-2 border-bottom border-3 border-dark"
           id="offcanvasExampleLabel"
         >
           {{ account.name }}
-        </h3>
+        </h2>
       </div>
       <button
         type="button"
@@ -47,10 +47,20 @@
     </div>
     <div class="offcanvas-body">
       <div class="mt-32">
-        <ul v-for="p in projects" :key="p.id" class="list-group-flush">
+        <ul v-for="p in projects" :key="p.id" class="">
           <router-link :to="{ name: 'Project', params: { projectId: p.id } }">
-            <li class="list-group-item selectable m-1 float text-center">
-              {{ p.name }}
+            <li
+              class="
+                round
+                list-group-item
+                selectable
+                m-1
+                float
+                text-center
+                bg-dark
+              "
+            >
+              <h3>{{ p.name }}</h3>
             </li>
           </router-link>
         </ul>
@@ -93,7 +103,7 @@ export default {
   border-radius: 50%;
   height: 125px;
   width: 125px;
-  border: solid #c38d9e;
+  border: solid;
   border-width: 4px;
 }
 .float:hover {
