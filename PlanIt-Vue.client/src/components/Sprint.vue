@@ -53,7 +53,7 @@
                 class="col-md-8 d-flex justify-content-around align-items-end"
               >
                 <h4 class="d-flex justify-contents-center align-items-center">
-                  {{ totalTaskWeight }}
+                  {{ totalWeight }}
                 </h4>
                 <i
                   class="
@@ -106,6 +106,15 @@ export default {
     const route = useRoute()
 
     return {
+      totalWeight: computed(() => {
+        let taskWeights = AppState.tasks.filter(t => t.sprintId == props.sprint.id)
+        let weight = 0
+        taskWeights.forEach(t => {
+          weight += t.weight
+
+        });
+        return weight
+      }),
       tasks: computed(() => AppState.tasks),
       account: computed(() => AppState.account),
       projects: computed(() => AppState.projects),
